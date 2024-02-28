@@ -3,12 +3,26 @@ const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
+const loader = document.getElementById('loader');
 
 // fetching quotes from an api
 // let apiQuotes = [];
 
+// function to show loading
+function showLoadingSpinner() {
+  loader.hidden = false;
+  quoteContainer.hidden = true;
+}
+
+//function to hide loading
+function removeLoadingSpinner() {
+  quoteContainer.hidden = false;
+  loader.hidden = true;
+}
+
 function newQuote() {
   //picking a random quote
+  showLoadingSpinner();
 
   const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
   // check if athor is empty and replace it with unkown
@@ -25,11 +39,14 @@ function newQuote() {
   } else {
     quoteText.classList.remove('long-quote');
   }
+  //  set quote, hide loader
 
   quoteText.textContent = quote.text;
+  removeLoadingSpinner();
 }
 
 // async function getQuotes() {
+// showLoadingSpinner();
 // const apiUrl =" ";
 
 // try {
